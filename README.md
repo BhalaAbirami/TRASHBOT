@@ -35,7 +35,7 @@ TRASHBOT is an embedded robotic system designed for autonomous waste detection, 
 
 ## Repository Structure
 - `firmware/` → Embedded control logic
-- `hardware/` → BOM and architecture diagrams
+- `hardware/` → BOM and architecture
 - `documentation/` → System operation details
 - `images/` → operational sequence representation 
  
