@@ -4,7 +4,7 @@
 //
 // Responsibilities:
 // 1. Robot movement control
-// 2. Obstacle detection
+// 2. Waste detection
 // 3. Bin full monitoring
 // 4. Communication with robotic arm controller
 // 5. FSM based navigation logic
@@ -32,7 +32,7 @@ SoftwareSerial link(7, 8); // RX, TX
 
 // ======================================================
 // FRONT ULTRASONIC SENSOR
-// Used for obstacle detection
+// Used for waste detection
 // ======================================================
 
 #define TRIG 9
@@ -60,7 +60,7 @@ SoftwareSerial link(7, 8); // RX, TX
 // FSM STATES
 //
 // MOVE           -> Normal navigation
-// OBSTACLE_STOP  -> Wait when obstacle detected
+// DETECTED_STOP  -> Wait when waste detected
 // AUTO_WAIT      -> Periodic automatic pause
 // BIN_FULL       -> Stop system if bin is full
 // ARM_LOCK       -> Wait until arm operation completes
@@ -68,7 +68,7 @@ SoftwareSerial link(7, 8); // RX, TX
 
 enum State {
   MOVE,
-  OBSTACLE_STOP,
+  DETECTED_STOP,
   AUTO_WAIT,
   BIN_FULL,
   ARM_LOCK
@@ -297,10 +297,10 @@ void loop() {
       break;
 
     // ======================================================
-    // OBSTACLE STOP STATE
+    // WASTE DETECTION STOP STATE
     // ======================================================
 
-    case OBSTACLE_STOP:
+    case DETECTED_STOP:
 
       if (now - stateStart > 10000) {
 
