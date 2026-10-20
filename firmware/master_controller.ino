@@ -234,7 +234,7 @@ void loop() {
   // SENSOR READINGS
   // ======================================================
 
-  int obs = readUS(TRIG, ECHO);
+  int waste = readUS(TRIG, ECHO);
 
   bool dry = binFull(DRY_TRIG, DRY_ECHO);
   bool wet = binFull(WET_TRIG, WET_ECHO);
@@ -269,9 +269,9 @@ void loop() {
         stopMotors();
       }
 
-      else if (obs > 0 && obs <= STOP_DIST) {
+      else if (waste > 0 && waste <= STOP_DIST) {
 
-        state = OBSTACLE_STOP;
+        state = DETECTED_STOP;
 
         stateStart = now;
 
@@ -302,7 +302,7 @@ void loop() {
 
     case DETECTED_STOP:
 
-      if (now - stateStart > 10000) {
+      if (now - stateStart > 100000) {
 
         state = MOVE;
       }
