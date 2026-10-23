@@ -255,13 +255,6 @@ void loop() {
 
       moveForward();
 
-      if (!pickSent && !armBusy) {
-
-        link.println("PICK");
-
-        pickSent = true;
-      }
-
       if (armBusy) {
 
         state = ARM_LOCK;
@@ -272,6 +265,10 @@ void loop() {
       else if (waste > 0 && waste <= STOP_DIST) {
 
         state = DETECTED_STOP;
+       
+        link.println("PICK");
+
+        pickSent = true;
 
         stateStart = now;
 
@@ -302,8 +299,10 @@ void loop() {
 
     case DETECTED_STOP:
 
-      if (now - stateStart > 100000) {
-
+      if (now - stateStart > 100000 && armDone) {
+       
+        moveStart = millis();
+       
         state = MOVE;
       }
 
