@@ -31,7 +31,7 @@ SoftwareSerial link(7, 8); // RX, TX
 #define ENB 11
 
 // ======================================================
-// FRONT ULTRASONIC SENSOR
+//  ULTRASONIC SENSOR
 // Used for waste detection
 // ======================================================
 
@@ -264,8 +264,6 @@ void loop() {
         state = DETECTED_STOP;
        
         link.println("PICK");
-
-        pickSent = true;
 
         stateStart = now;
 
