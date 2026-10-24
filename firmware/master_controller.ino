@@ -81,7 +81,6 @@ State state = MOVE;
 // ======================================================
 
 bool armBusy = false;
-bool pickSent = false;
 
 // ======================================================
 // SYSTEM TIMERS
@@ -222,8 +221,6 @@ void loop() {
 
       armBusy = false;
 
-      pickSent = false;
-
       state = MOVE;
 
       moveStart = millis();
@@ -299,9 +296,7 @@ void loop() {
 
     case DETECTED_STOP:
 
-      if (now - stateStart > 100000 && !armBusy) {
-
-       pickSent = false;
+      if (now - stateStart > 50000 && !armBusy) {
        
         moveStart = millis();
        
@@ -316,7 +311,7 @@ void loop() {
 
     case AUTO_WAIT:
 
-      if (now - stateStart > 10000) {
+      if (now - stateStart > 100000) {
 
         moveStart = millis();
 
