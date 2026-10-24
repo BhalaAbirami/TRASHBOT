@@ -299,7 +299,9 @@ void loop() {
 
     case DETECTED_STOP:
 
-      if (now - stateStart > 100000 && armDone) {
+      if (now - stateStart > 100000 && !armBusy) {
+
+       pickSent = false;
        
         moveStart = millis();
        
